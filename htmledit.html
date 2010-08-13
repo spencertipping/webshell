@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>HTML Editor</title>
+
+    <script>
+      var update = function () {
+        document.getElementById ('rendered').src = 'data:text/html,' + escape (document.getElementById ('source').value);
+      };
+    </script>
+  </head>
+
+  <body>
+    <textarea style='float:left' rows='24' cols='80' id='source' onkeyup='update()'></textarea>
+    <iframe width='400' height='400' id='rendered'></iframe>
+  </body>
+</html>
