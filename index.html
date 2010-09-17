@@ -6,11 +6,15 @@
 
     <script>
       var timeout = null;
+      var last    = '';
       var update  = function () {
-        timeout && clearTimeout (timeout);
-        timeout = setTimeout (function () {
-          $('#rendered').attr('src', 'data:text/html,' + escape ($('#source').val()));
-        }, 500);
+        if (last !== $('#source').val()) {
+          timeout && clearTimeout (timeout);
+          timeout = setTimeout (function () {
+            $('#rendered').attr('src', 'data:text/html,' + escape ($('#source').val()));
+          }, 500);
+          last = $('#source').val();
+        }
       };
 
       $(function () {
