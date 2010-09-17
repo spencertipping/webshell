@@ -12,7 +12,7 @@
           timeout && clearTimeout (timeout);
           timeout = setTimeout (function () {
             $('#rendered').attr('src', 'data:text/html,' + escape ($('#source').val()));
-          }, 500);
+          }, 200);
           last = $('#source').val();
         }
       };
