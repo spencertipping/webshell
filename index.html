@@ -5,15 +5,17 @@
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
 
     <script>
-      var timeout = null;
-      var last    = '';
-      var update  = function () {
+      var timeout  = null;
+      var last     = '';
+      var use_ajax = false;
+
+      var update   = function () {
         if (last !== $('#source').val()) {
           timeout && clearTimeout (timeout);
           timeout = setTimeout (function () {
             var rendered = escape ($('#source').val());
-            $('#rendered').attr('src',  'data:text/html,'  + rendered);
             $('#download').attr('href', 'data:text/plain,' + rendered);
+            $('#rendered').attr('src', use_ajax ? 'http://spencertipping.com/webshell/reflect.php?data=' + rendered : 'data:text/html,' + rendered);
           }, 200);
           last = $('#source').val();
         }
@@ -24,6 +26,11 @@
           $('#source').val(x);
           update();
         });
+
+        $('#ajax').click (function () {
+          $('#ajax').remove();
+          use_ajax = true;
+        });
       });
     </script>
 
@@ -33,7 +40,7 @@
   </head>
 
   <body>
-    <div><a id='download' target='_blank'>Download HTML file</a></div>
+    <div><a id='download' target='_blank'>Download HTML file</a> | <button id='ajax'>Enable AJAX</button></div>
     <textarea style='width: 400px; height: 100%; background: #eee; border: solid 1px #ccc' id='source' onkeyup='update()'></textarea>
     <iframe style='position: absolute; left: 420px; height: 100%; border: solid 1px #ccc' id='rendered'></iframe>
   </body>
