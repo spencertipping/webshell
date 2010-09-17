@@ -2,14 +2,23 @@
   <head>
     <title>HTML Editor</title>
 
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+
     <script>
       var timeout = null;
       var update  = function () {
         timeout && clearTimeout (timeout);
         timeout = setTimeout (function () {
-          document.getElementById ('rendered').src = 'data:text/html,' + escape (document.getElementById ('source').value);
+          $('#rendered').attr('src', 'data:text/html,' + escape ($('#source').val()));
         }, 500);
       };
+
+      $(function () {
+        document.location.hash && $.get (document.location.hash.substr(1), function (x) {
+          $('#source').val(x);
+          update();
+        });
+      });
     </script>
   </head>
 
