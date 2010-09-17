@@ -3,8 +3,12 @@
     <title>HTML Editor</title>
 
     <script>
-      var update = function () {
-        document.getElementById ('rendered').src = 'data:text/html,' + escape (document.getElementById ('source').value);
+      var timeout = null;
+      var update  = function () {
+        timeout && clearTimeout (timeout);
+        timeout = setTimeout (function () {
+          document.getElementById ('rendered').src = 'data:text/html,' + escape (document.getElementById ('source').value);
+        }, 500);
       };
     </script>
   </head>
