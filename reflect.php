@@ -1,1 +1,1 @@
-<?php echo $_GET['data']; ?>
+<?php echo htmlentities($_GET['data']); ?>
