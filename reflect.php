@@ -1,1 +1,1 @@
-<?php echo htmlentities($_GET['data']); ?>
+<?php echo stripslashes($_GET['data']); ?>
