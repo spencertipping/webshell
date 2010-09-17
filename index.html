@@ -11,7 +11,9 @@
         if (last !== $('#source').val()) {
           timeout && clearTimeout (timeout);
           timeout = setTimeout (function () {
-            $('#rendered').attr('src', 'data:text/html,' + escape ($('#source').val()));
+            var rendered = escape ($('#source').val());
+            $('#rendered').attr('src',  'data:text/html,'  + rendered);
+            $('#download').attr('href', 'data:text/plain,' + rendered);
           }, 200);
           last = $('#source').val();
         }
@@ -27,6 +29,7 @@
   </head>
 
   <body>
+    <a id='download' target='_blank'>Download HTML file</a>
     <textarea style='width: 400px; height: 100%; background: #eee; border: solid 1px #ccc' id='source' onkeyup='update()'></textarea>
     <iframe style='position: absolute; left: 420px; height: 100%; border: solid 1px #ccc' id='rendered'></iframe>
   </body>
